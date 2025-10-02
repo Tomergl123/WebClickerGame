@@ -1,11 +1,12 @@
 let score = 0
 let multiplier = 1
 let cost = 10
+let upgradeAmount = 1
 let clicker = document.getElementById("clicker");
 let clicks = document.getElementById("clicks");
 let reset = document.getElementById("reset");
 let multi = document.getElementById("multi");
-let multiText = document.getElementById("multiText");
+let multiAmount = document.getElementById("multiAmount");
 let costText = document.getElementById("costText");
 
 
@@ -21,8 +22,10 @@ reset.addEventListener("click", function(){
     multiplier = 1
     cost = 10
     clicks.textContent = score
-    multiText.textContent = multiplier
+    multiAmount.textContent = multiplier
     costText.textContent = cost
+    multiAmount.textContent = upgradeAmount
+
 
 })
 
@@ -32,14 +35,16 @@ multi.addEventListener("click", function(){
         multiplier = multiplier * 2
         score = score - cost
         clicks.textContent = score
-        multiText.textContent = multiplier
+        multiAmount.textContent = multiplier
         cost = cost * 2.5
         costText.textContent = cost
-
-
+        upgradeAmount = upgradeAmount * 2
+        multiAmount.textContent = upgradeAmount
     } else {
-        multiplier = multiplier * 1
-        multiText.textContent = "Not enough clicks!"
+        multiAmount.textContent = "Not enough clicks!"
+        setTimeout(() => {
+            multiAmount.textContent = upgradeAmount;
+        }, 1000);
     }
 })
 

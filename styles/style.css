@@ -28,7 +28,7 @@ button:hover {
 }
 
 
-#clicks, #multiText {
+#clicks, #multiText #multiAmount #multi {
     font-size: 24px;
     margin: 10px 0;
     font-weight: strong;

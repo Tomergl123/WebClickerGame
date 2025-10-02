@@ -1,13 +1,21 @@
 let score = 0
 let multiplier = 1
-let cost = 10
+let costMulti = 10
+let autoCost = 100
 let upgradeAmount = 1
+let autoClick = 0
 let clicker = document.getElementById("clicker");
 let clicks = document.getElementById("clicks");
 let reset = document.getElementById("reset");
 let multi = document.getElementById("multi");
 let multiAmount = document.getElementById("multiAmount");
+let multiText = document.getElementById("multiText");
 let costText = document.getElementById("costText");
+let autoclickBtn = document.getElementById("autoClickBtn");
+let autoText = document.getElementById("autoText");
+let autoAmount = document.getElementById("autoAmount");
+let autocostText = document.getElementById("autocostText");
+
 
 
 // creating function to LISTEN for click
@@ -20,31 +28,67 @@ clicker.addEventListener("click", function(){
 reset.addEventListener("click", function(){
     score = 0;
     multiplier = 1
-    cost = 10
+    costMulti = 10
+    autoClick = 0
+    costAuto = 100
     clicks.textContent = score
     multiAmount.textContent = multiplier
-    costText.textContent = cost
-    multiAmount.textContent = upgradeAmount
+    costText.textContent = costMulti
+    autoText.textContent = autoClick
 
 
 })
 
 //Multiplier button
 multi.addEventListener("click", function(){
-    if (score >= cost){
+    if (score >= costMulti){
         multiplier = multiplier * 2
-        score = score - cost
+        score = score - costMulti
         clicks.textContent = score
         multiAmount.textContent = multiplier
-        cost = cost * 2.5
-        costText.textContent = cost
-        upgradeAmount = upgradeAmount * 2
-        multiAmount.textContent = upgradeAmount
+        costMulti = costMulti * 2.5
+        costText.textContent = costMulti
+        console.log("Multiplier is now:", multiplier);
     } else {
-        multiAmount.textContent = "Not enough clicks!"
+        multi.disabled = true
+        let originalHTML = multi.innerHTML;
+        multi.innerHTML = "Not enough clicks!";
         setTimeout(() => {
-            multiAmount.textContent = upgradeAmount;
+            multi.innerHTML = originalHTML;
+            multiAmount = document.getElementById("multiAmount");
+            multiAmount.textContent = multiplier;
+            multi.disabled = false
         }, 1000);
     }
 })
 
+//Autoclicker function
+function autoClickFunction(){
+    score += autoClick;
+    clicks.textContent = score;
+}
+
+setInterval(autoClickFunction, 1000);
+
+//Autoclicker button
+autoclickBtn.addEventListener("click", function(){
+    if (score >= autoCost){
+        autoClick += 1
+        score = score - autoCost
+        clicks.textContent = score
+        autoAmount.textContent = autoClick
+        cost = cost * 5
+        autocostText.textContent = autoCost
+        console.log("Autoclicker is now:", autoClick);
+    }
+    else {
+        let originalHTML = autoclickBtn.innerHTML;
+        autoclickBtn.innerHTML = "Not enough clicks!";
+        autoclickBtn.disabled = true;
+        setTimeout(() => {
+            autoclickBtn.innerHTML = originalHTML;
+            autoAmount.textContent = autoClick;
+            autoclickBtn.disabled = false;
+        }, 1000);
+    }
+})

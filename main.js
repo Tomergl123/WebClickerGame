@@ -73,12 +73,13 @@ setInterval(autoClickFunction, 1000);
 //Autoclicker button
 autoclickBtn.addEventListener("click", function(){
     if (score >= autoCost){
-        autoClick += 1
+        autoClick *= 2
         score = score - autoCost
         clicks.textContent = score
         autoAmount.textContent = autoClick
-        cost = cost * 5
+        autoCost = autoCost * 5
         autocostText.textContent = autoCost
+        autoAmount.textContent = autoClick
         console.log("Autoclicker is now:", autoClick);
     }
     else {
